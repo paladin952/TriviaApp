@@ -10,7 +10,9 @@ I18n.translations = {
         generic_error: 'Something went wrong. Please try again!',
         retry: 'Retry',
         play_again: 'PLAY AGAIN?',
-        you_scored: 'You scored\n{{score}} / {{numberOfQuestions}}'
+        you_scored: 'You scored\n{{score}} / {{numberOfQuestions}}',
+        button_true: 'True',
+        button_false: 'False'
     }
 };
 

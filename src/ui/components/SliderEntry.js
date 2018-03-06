@@ -1,71 +1,77 @@
-import React, { Component } from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet, Dimensions, Platform} from 'react-native';
+import React, {Component} from 'react';
+import {View, Image, TouchableOpacity, StyleSheet, Dimensions, Platform} from 'react-native';
 import PropTypes from 'prop-types';
-import { ParallaxImage } from 'react-native-snap-carousel';
+import {Button, Text} from "native-base";
+import Strings from '../../utils/strings'
+
+const Entities = require('html-entities').XmlEntities;
+const entities = new Entities();
 
 export default class SliderEntry extends Component {
 
     static propTypes = {
         data: PropTypes.object.isRequired,
-        even: PropTypes.bool,
-        parallax: PropTypes.bool,
-        parallaxProps: PropTypes.object
     };
 
-    get image () {
-        const { data: { illustration }, parallax, parallaxProps, even } = this.props;
-
-        return parallax ? (
-            <ParallaxImage
-                source={{ uri: illustration }}
-                containerStyle={[styles.imageContainer, even ? styles.imageContainerEven : {}]}
-                style={styles.image}
-                parallaxFactor={0.35}
-                showSpinner={true}
-                spinnerColor={even ? 'rgba(255, 255, 255, 0.4)' : 'rgba(0, 0, 0, 0.25)'}
-                {...parallaxProps}
-            />
-        ) : (
-            <Image
-                source={{ uri: {} }}
-                style={styles.image}
-            />
-        );
-    }
-
-    render () {
-        const { category, even } = this.props;
+    render() {
+        const {data: {category, question}} = this.props;
 
         const uppercaseTitle = category ? (
             <Text
-                style={[styles.title, even ? styles.titleEven : {}]}
+                style={styles.title}
                 numberOfLines={2}
             >
-                { category.toUpperCase() }
+                {category.toUpperCase()}
             </Text>
         ) : false;
 
         return (
-            <TouchableOpacity
+            <View
                 activeOpacity={1}
                 style={styles.slideInnerContainer}
-                onPress={() => { alert(`You've clicked`); }}
             >
-                <View style={styles.shadow} />
-                <View style={[styles.imageContainer, even ? styles.imageContainerEven : {}]}>
-                    {/*{ this.image }*/}
-                    <View style={[styles.radiusMask, even ? styles.radiusMaskEven : {}]} />
+                <View style={styles.shadow}/>
+                {/*<View style={styles.imageContainer}>*/}
+                {/*<View style={[styles.radiusMask, even ? styles.radiusMaskEven : {}]}/>*/}
+                {/*</View>*/}
+
+                <View style={styles.textContainer}>
+                    {uppercaseTitle}
+
+                    <View style={{flex: 1}}>
+                        <Text
+                            style={styles.subtitle}
+                            numberOfLines={2}
+                        >
+                            {entities.decode(question)}
+                        </Text>
+                    </View>
+
+                    <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+                        <Button rounded
+                                danger
+                                style={styles.button}
+                                onPress={() => {
+                                    this.props.onClickFalse(this.props.index, this.props.data);
+                                }}
+                        >
+                            <Text>{Strings.t('button_false')}</Text>
+                        </Button>
+
+                        <Button rounded
+                                style={{marginLeft: 16}}
+                                onPress={() => {
+                                    this.props.onClickTrue(this.props.index, this.props.data);
+                                }}
+                        >
+                            <Text>{Strings.t('button_true')}</Text>
+                        </Button>
+                    </View>
+
                 </View>
-                <View style={[styles.textContainer, even ? styles.textContainerEven : {}]}>
-                    { uppercaseTitle }
-                    <Text
-                        style={styles.subtitle}
-                        numberOfLines={2}
-                    >
-                        dsadsadsa dsa dsa dsa dsa das dasd asda s
-                    </Text>
-                </View>
-            </TouchableOpacity>
+
+
+            </View>
         );
     }
 }
@@ -78,24 +84,25 @@ export const colors = {
 };
 
 const IS_IOS = Platform.OS === 'ios';
-const { width: viewportWidth, height: viewportHeight } = Dimensions.get('window');
+const {width: viewportWidth, height: viewportHeight} = Dimensions.get('window');
 
-function wp (percentage) {
+function wp(percentage) {
     const value = (percentage * viewportWidth) / 100;
     return Math.round(value);
 }
 
-const slideHeight = viewportHeight * 0.6;
+const slideHeight = viewportHeight * 0.35;
 const slideWidth = wp(94);
-const itemHorizontalMargin = wp(2);
+const itemHorizontalMargin = wp(3);
 
 export const sliderWidth = viewportWidth;
-export const itemWidth = slideWidth + itemHorizontalMargin * 2;
+export const itemWidth = slideWidth + itemHorizontalMargin;
 
 const entryBorderRadius = 8;
 
 const styles = StyleSheet.create({
     slideInnerContainer: {
+        alignSelf: 'center',
         width: itemWidth,
         height: slideHeight,
         paddingHorizontal: itemHorizontalMargin,
@@ -109,7 +116,7 @@ const styles = StyleSheet.create({
         bottom: 18,
         shadowColor: colors.black,
         shadowOpacity: 0.25,
-        shadowOffset: { width: 0, height: 10 },
+        shadowOffset: {width: 0, height: 10},
         shadowRadius: 10,
         borderRadius: entryBorderRadius
     },
@@ -143,11 +150,14 @@ const styles = StyleSheet.create({
         backgroundColor: colors.black
     },
     textContainer: {
+        flex: 4,
         justifyContent: 'center',
         paddingTop: 20 - entryBorderRadius,
         paddingBottom: 20,
         paddingHorizontal: 16,
         backgroundColor: 'white',
+        borderTopRightRadius: entryBorderRadius,
+        borderTopLeftRadius: entryBorderRadius,
         borderBottomLeftRadius: entryBorderRadius,
         borderBottomRightRadius: entryBorderRadius
     },
@@ -155,8 +165,9 @@ const styles = StyleSheet.create({
         backgroundColor: colors.black
     },
     title: {
+        textAlign: 'center',
         color: colors.black,
-        fontSize: 13,
+        fontSize: 24,
         fontWeight: 'bold',
         letterSpacing: 0.5
     },
@@ -164,9 +175,10 @@ const styles = StyleSheet.create({
         color: 'white'
     },
     subtitle: {
-        marginTop: 6,
+        textAlign: 'center',
+        marginTop: 16,
         color: colors.gray,
-        fontSize: 12,
+        fontSize: 20,
         fontStyle: 'italic'
     },
     subtitleEven: {

@@ -13,7 +13,6 @@ export const endNetwork = () => ({
 
 export const showGenericError = () => ({
    type: actions.GENERIC_ERROR,
-    b: b.b.a,
     payload: {
        title: Strings.t('generic_error'),
         actionButton: {

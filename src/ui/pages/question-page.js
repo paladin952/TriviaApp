@@ -2,24 +2,45 @@ import React from 'react';
 import {View, StyleSheet, ActivityIndicator, Dimensions, Text} from "react-native";
 import {Button, Card, Container, Content, Header, Icon} from "native-base";
 import {connect} from "react-redux";
-import * as actions from "../../redux/actions/questions";
+import * as questionActions from "../../redux/actions/questions";
 import Carousel, {Pagination} from 'react-native-snap-carousel';
 import SliderEntry, {itemWidth, sliderWidth} from "../components/SliderEntry";
 
 
 class QuestionPage extends React.Component {
 
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            index: 0
+        };
+    }
+
     componentDidMount() {
         this.props.fetchQuestions();
     }
 
-    renderItem({item, index}) {
+    onAnswerClicked = (response, item, index) => {
+        this.props.answer(response, item, index);
+        this.carousel.snapToNext();
+        if (index === this.props.questions.length - 1) {
+            this.props.navigation.navigate('ResultPage')
+        }
+    };
+
+    renderItem = ({item, index}) => {
         return (<SliderEntry
             data={item}
-            // even={(index + 1) % 2 === 0}
-            even={false}
+            index={index}
+            onClickTrue={(index, item) => {
+                this.onAnswerClicked(true, item, index);
+            }}
+            onClickFalse={(index, item) => {
+                this.onAnswerClicked(false, item, index);
+            }}
         />);
-    }
+    };
 
     render() {
         if (this.props.loading) {
@@ -38,11 +59,11 @@ class QuestionPage extends React.Component {
                     {/*</View>*/}
 
                     {/*<Card>*/}
-                        {/*<View style={{padding: 16, flex: 1}}>*/}
-                            {/*<Text>*/}
-                                {/*{JSON.stringify(this.props.questions)}*/}
-                            {/*</Text>*/}
-                        {/*</View>*/}
+                    {/*<View style={{padding: 16, flex: 1}}>*/}
+                    {/*<Text>*/}
+                    {/*{JSON.stringify(this.props.questions)}*/}
+                    {/*</Text>*/}
+                    {/*</View>*/}
                     {/*</Card>*/}
 
                     {/*<View>*/}
@@ -53,23 +74,28 @@ class QuestionPage extends React.Component {
                         <Text style={styles.title}>{`Example title`}</Text>
                         <Text style={styles.subtitle}>Subtitle</Text>
                         <Carousel
+                            ref={(ref) => {
+                                this.carousel = ref;
+                            }}
                             data={this.props.questions}
                             renderItem={this.renderItem}
                             sliderWidth={sliderWidth}
                             itemWidth={itemWidth}
                             inactiveSlideScale={0.95}
                             inactiveSlideOpacity={1}
-                            enableMomentum={false}
+                            enableMomentum={true}
                             activeSlideAlignment={'start'}
                             containerCustomStyle={styles.slider}
                             contentContainerCustomStyle={styles.sliderContentContainer}
                             activeAnimationType={'spring'}
                             layout={'tinder'}
-                            lockScrollWhileSnapping={true}
                             activeAnimationOptions={{
                                 friction: 4,
                                 tension: 40
                             }}
+                            scrollEnabled={false}
+                            useScrollView={false}
+                            scrollToIndex={{animated: true, index: this.state.index}}
                         />
 
                         <Pagination
@@ -177,7 +203,8 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = dispatch => {
     return {
-        fetchQuestions: () => dispatch(actions.fetchQuestions())
+        fetchQuestions: () => dispatch(questionActions.fetchQuestions()),
+        answer: (response, item, index) => dispatch(questionActions.answer(response, item, index))
     }
 };
 

@@ -17,7 +17,7 @@ const StackNav = StackNavigator({
     Details: {
         screen: QuestionPage,
     },
-    Result: {
+    ResultPage: {
         screen: ResultPage
     }
 });
