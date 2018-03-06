@@ -17,7 +17,6 @@ const questionsMiddleware = ({dispatch, getState}) => next => action => {
         dispatch(setAnswer(item, index, false));
     }
     if (index < questions.length - 1) {
-        console.warn("hereeee", index);
         dispatch(setCurrentIndex(index + 1))
     }
 };

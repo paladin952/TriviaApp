@@ -18,7 +18,10 @@ const StackNav = StackNavigator({
         screen: QuestionPage,
     },
     ResultPage: {
-        screen: ResultPage
+        screen: ResultPage,
+        navigationOptions: {
+            header: null
+        }
     }
 });
 

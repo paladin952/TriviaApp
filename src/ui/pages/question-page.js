@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import * as questionActions from "../../redux/actions/questions";
 import Carousel, {Pagination} from 'react-native-snap-carousel';
 import SliderEntry, {itemWidth, sliderWidth} from "../components/SliderEntry";
-
+import {NavigationActions} from 'react-navigation'
 
 class QuestionPage extends React.Component {
 
@@ -24,8 +24,14 @@ class QuestionPage extends React.Component {
     onAnswerClicked = (response, item, index) => {
         this.carousel.snapToNext();
         this.props.answer(response, item, index);
+
         if (index === this.props.questions.length - 1) {
-            this.props.navigation.navigate('ResultPage')
+            this.props.navigation.dispatch(NavigationActions.reset(
+                {index: 0,
+                    actions: [
+                        NavigationActions.navigate({routeName: 'ResultPage'})
+                    ]
+                }));
         }
     };
 
@@ -34,9 +40,11 @@ class QuestionPage extends React.Component {
             data={item}
             index={index}
             onClickTrue={(index, item) => {
+                console.warn("clicked");
                 this.onAnswerClicked(true, item, index);
             }}
             onClickFalse={(index, item) => {
+                console.warn("clicked");
                 this.onAnswerClicked(false, item, index);
             }}
         />);
@@ -83,7 +91,7 @@ class QuestionPage extends React.Component {
                             itemWidth={itemWidth}
                             inactiveSlideScale={0.95}
                             inactiveSlideOpacity={1}
-                            enableMomentum={true}
+                            enableMomentum={false}
                             activeSlideAlignment={'start'}
                             containerCustomStyle={styles.slider}
                             contentContainerCustomStyle={styles.sliderContentContainer}

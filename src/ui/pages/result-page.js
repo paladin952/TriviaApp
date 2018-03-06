@@ -2,9 +2,10 @@ import React from 'react';
 import {connect} from "react-redux";
 import {ScrollView, Text, View} from "react-native";
 import {Button} from "native-base";
-import {NavigationActions} from 'react-navigation'
 import * as questionActions from "../../redux/actions/questions";
+import {NavigationActions} from 'react-navigation'
 import Strings from "../../utils/strings";
+
 
 const Entities = require('html-entities').XmlEntities;
 const entities = new Entities();
@@ -49,7 +50,7 @@ class ResultPage extends React.Component {
                                 {
                                     index: 0,
                                     actions: [
-                                        NavigationActions.navigate({routeName: 'Details'})
+                                        NavigationActions.navigate({routeName: 'Menu'})
                                     ]
                                 }));
                         }}
