@@ -3,6 +3,9 @@ import {View, StyleSheet, ActivityIndicator, Dimensions, Text} from "react-nativ
 import {Button, Card, Container, Content, Header, Icon} from "native-base";
 import {connect} from "react-redux";
 import * as actions from "../../redux/actions/questions";
+import Carousel, {Pagination} from 'react-native-snap-carousel';
+import SliderEntry, {itemWidth, sliderWidth} from "../components/SliderEntry";
+
 
 class QuestionPage extends React.Component {
 
@@ -10,6 +13,13 @@ class QuestionPage extends React.Component {
         this.props.fetchQuestions();
     }
 
+    renderItem({item, index}) {
+        return (<SliderEntry
+            data={item}
+            // even={(index + 1) % 2 === 0}
+            even={false}
+        />);
+    }
 
     render() {
         if (this.props.loading) {
@@ -23,21 +33,66 @@ class QuestionPage extends React.Component {
         return (
             <Container>
                 <Content>
-                    <View>
+                    {/*<View>*/}
 
+                    {/*</View>*/}
+
+                    {/*<Card>*/}
+                        {/*<View style={{padding: 16, flex: 1}}>*/}
+                            {/*<Text>*/}
+                                {/*{JSON.stringify(this.props.questions)}*/}
+                            {/*</Text>*/}
+                        {/*</View>*/}
+                    {/*</Card>*/}
+
+                    {/*<View>*/}
+
+                    {/*</View>*/}
+
+                    <View style={styles.exampleContainer}>
+                        <Text style={styles.title}>{`Example title`}</Text>
+                        <Text style={styles.subtitle}>Subtitle</Text>
+                        <Carousel
+                            data={this.props.questions}
+                            renderItem={this.renderItem}
+                            sliderWidth={sliderWidth}
+                            itemWidth={itemWidth}
+                            inactiveSlideScale={0.95}
+                            inactiveSlideOpacity={1}
+                            enableMomentum={false}
+                            activeSlideAlignment={'start'}
+                            containerCustomStyle={styles.slider}
+                            contentContainerCustomStyle={styles.sliderContentContainer}
+                            activeAnimationType={'spring'}
+                            layout={'tinder'}
+                            lockScrollWhileSnapping={true}
+                            activeAnimationOptions={{
+                                friction: 4,
+                                tension: 40
+                            }}
+                        />
+
+                        <Pagination
+                            dotsLength={this.props.questions.length}
+                            activeDotIndex={0}
+                            containerStyle={{
+                                paddingVertical: 8
+                            }}
+                            dotColor={'rgba(255, 255, 255, 0.92)'}
+                            dotStyle={{
+                                width: 8,
+                                height: 8,
+                                borderRadius: 4,
+                                marginHorizontal: 2
+                            }}
+                            inactiveDotColor={colors.black}
+                            inactiveDotOpacity={0.4}
+                            inactiveDotScale={0.6}
+                            carouselRef={this._slider1Ref}
+                            tappableDots={!!this._slider1Ref}
+                        />
                     </View>
 
-                    <Card>
-                        <View style={{padding: 16, flex: 1}}>
-                            <Text>
-                                {JSON.stringify(this.props.questions)}
-                            </Text>
-                        </View>
-                    </Card>
-
-                    <View>
-
-                    </View>
                 </Content>
             </Container>
         )
