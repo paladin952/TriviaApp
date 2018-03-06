@@ -1,6 +1,6 @@
 import React from 'react';
 import * as actions from "../consts/action-types";
-import Snackbar from 'react-native-snackbar';
+// import Snackbar from 'react-native-snackbar';
 
 const api = ({dispatch, getState}) => next => action => {
 
