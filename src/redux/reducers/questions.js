@@ -1,6 +1,6 @@
 import * as actions from "../consts/action-types";
 
-let initialData = {questions: [], answered: [], correctCounter: 0};
+let initialData = {questions: [], answered: [], correctCounter: 0, currentQuestionIndex: 0};
 
 const questionsReducer = (state = initialData, action) => {
     switch (action.type) {
@@ -9,6 +9,9 @@ const questionsReducer = (state = initialData, action) => {
 
         case actions.SET_ANSWER:
             return {...state, answered: [...state.answered, action.payload]};
+
+        case actions.SEW_CURRENT_INDEX:
+            return {...state, currentQuestionIndex: action.payload};
 
         case actions.INCREMENT_CORRECT_COUNTER:
             console.warn('INCREMENT_CORRECT_COUNTER', state.answered);

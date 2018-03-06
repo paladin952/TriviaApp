@@ -47,3 +47,8 @@ export const incrementCorrectCounter = () => ({
 export const reset = () => ({
     type: actions.RESET,
 });
+
+export const setCurrentIndex = (index) => ({
+    type: actions.SEW_CURRENT_INDEX,
+    payload: index
+});

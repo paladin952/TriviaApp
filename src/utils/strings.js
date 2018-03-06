@@ -12,7 +12,7 @@ I18n.translations = {
         play_again: 'PLAY AGAIN?',
         you_scored: 'You scored\n{{score}} / {{numberOfQuestions}}',
         button_true: 'True',
-        button_false: 'False'
+        button_false: 'False',
     }
 };
 

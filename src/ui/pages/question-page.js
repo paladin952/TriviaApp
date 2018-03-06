@@ -22,8 +22,8 @@ class QuestionPage extends React.Component {
     }
 
     onAnswerClicked = (response, item, index) => {
-        this.props.answer(response, item, index);
         this.carousel.snapToNext();
+        this.props.answer(response, item, index);
         if (index === this.props.questions.length - 1) {
             this.props.navigation.navigate('ResultPage')
         }
@@ -100,7 +100,7 @@ class QuestionPage extends React.Component {
 
                         <Pagination
                             dotsLength={this.props.questions.length}
-                            activeDotIndex={0}
+                            activeDotIndex={this.props.currentIndex}
                             containerStyle={{
                                 paddingVertical: 8
                             }}
@@ -198,7 +198,8 @@ const mapStateToProps = state => {
     return {
         loading: state.ui.loading,
         genericError: state.ui.genericError,
-        questions: state.questions.questions
+        questions: state.questions.questions,
+        currentIndex: state.questions.currentQuestionIndex
     }
 };
 const mapDispatchToProps = dispatch => {
