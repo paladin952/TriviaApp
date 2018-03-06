@@ -45,7 +45,6 @@ class ResultPage extends React.Component {
                             padding: 16
                         }}
                         onPress={() => {
-                            this.props.reset();
                             this.props.navigation.dispatch(NavigationActions.reset(
                                 {
                                     index: 0,
@@ -74,7 +73,6 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = dispatch => {
     return {
-        reset: () => dispatch(questionActions.reset())
     }
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ResultPage);

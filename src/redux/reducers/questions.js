@@ -17,8 +17,8 @@ const questionsReducer = (state = initialData, action) => {
             console.warn('INCREMENT_CORRECT_COUNTER', state.answered);
             return {...state, correctCounter: state.correctCounter + 1};
 
-        case action.RESET:
-            return {...state, answered: [], correctCounter: 0};
+        case actions.RESET:
+            return {...state, questions: [], answered: [], correctCounter: 0, currentQuestionIndex: 0};
 
         default:
             return state;

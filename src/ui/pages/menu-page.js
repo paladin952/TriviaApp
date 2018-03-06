@@ -5,6 +5,8 @@ import {Button, Container, Content, Header, Text} from "native-base";
 import {connect} from "react-redux";
 import * as Actions from "../../redux/actions/ui";
 import {bindActionCreators} from 'redux';
+import {NavigationActions} from 'react-navigation'
+import * as questionActions from "../../redux/actions/questions";
 
 class MenuPage extends React.Component {
 
@@ -27,6 +29,7 @@ class MenuPage extends React.Component {
                     <Button rounded
                             style={styles.button}
                             onPress={() => {
+                                this.props.reset();
                                 this.props.navigation.navigate('Details')
                             }}
                     >
@@ -64,7 +67,9 @@ const styles = StyleSheet.create({
 });
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators(Actions, dispatch);
+    return {
+        reset: () => dispatch(questionActions.reset()),
+    };
 };
 
 export default connect(null, mapDispatchToProps)(MenuPage);
