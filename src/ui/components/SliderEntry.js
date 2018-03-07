@@ -50,21 +50,23 @@ export default class SliderEntry extends Component {
                     <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
                         <Button rounded
                                 danger
-                                style={styles.button}
+                                style={{
+                                    padding: 16
+                                }}
                                 onPress={() => {
                                     this.props.onClickFalse(this.props.index, this.props.data);
                                 }}
                         >
-                            <Text>{Strings.t('button_false')}</Text>
+                            <Text style={{fontWeight: 'bold'}}>{Strings.t('button_false')}</Text>
                         </Button>
 
                         <Button rounded
-                                style={{marginLeft: 16}}
+                                style={{marginLeft: 16, backgroundColor: '#009933', padding: 16}}
                                 onPress={() => {
                                     this.props.onClickTrue(this.props.index, this.props.data);
                                 }}
                         >
-                            <Text>{Strings.t('button_true')}</Text>
+                            <Text style={{fontWeight: 'bold'}}>{Strings.t('button_true')}</Text>
                         </Button>
                     </View>
 
@@ -80,7 +82,8 @@ export const colors = {
     black: '#1a1917',
     gray: '#888888',
     background1: '#B721FF',
-    background2: '#21D4FD'
+    background2: '#21D4FD',
+    green: '#009933'
 };
 
 const IS_IOS = Platform.OS === 'ios';

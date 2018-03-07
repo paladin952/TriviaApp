@@ -33,7 +33,7 @@ class MenuPage extends React.Component {
                                 this.props.navigation.navigate('Details')
                             }}
                     >
-                        <Text>{Strings.t('menu_begin_button')}</Text>
+                        <Text style={{fontWeight: 'bold'}}>{Strings.t('menu_begin_button')}</Text>
                     </Button>
                 </Content>
             </Container>
@@ -61,6 +61,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     button: {
+        backgroundColor: '#009933',
         alignSelf: 'center',
         padding: 16
     }

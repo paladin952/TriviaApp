@@ -19,11 +19,11 @@ class ResultPage extends React.Component {
                     key={i}
                 >
                     <View style={{flex: 1, flexDirection: 'row'}}>
-                        <Text>{t.item.isCorrect ? "+" : "-"}</Text>
+                        <Text style={{color: 'white'}}>{t.item.isCorrect ? "+" : "-"}</Text>
 
                         <View>
-                            <Text style={{fontSize: 20, fontWeight: 'bold'}}>{t.item.category}</Text>
-                            <Text style={{marginLeft: 16, fontSize: 16}}>{entities.decode(t.item.question)}</Text>
+                            <Text style={{fontSize: 20, fontWeight: 'bold', color: 'white'}}>{t.item.category}</Text>
+                            <Text style={{marginLeft: 16, fontSize: 16, color: 'white', opacity: 0.8}}>{entities.decode(t.item.question)}</Text>
                         </View>
                     </View>
 
@@ -33,19 +33,20 @@ class ResultPage extends React.Component {
         });
 
         return (
-            <ScrollView>
-                <View style={{flex: 1, backgroundColor: 'white'}}>
-
-                    <Text>
+            <ScrollView style={{backgroundColor: '#333333'}}>
+                <View>
+                    <Text style={{color: 'white', fontWeight: 'bold', fontSize: 28, marginTop: 32, textAlign: 'center'}}>
                         {Strings.t('you_scored', {score: this.props.correctCounter, numberOfQuestions: this.props.answered.length})}
                     </Text>
 
-                    <View>
+                    <View style={{marginTop: 8}}>
                         {answered}
                     </View>
 
                     <Button rounded
                             style={{
+                                marginBottom: 16,
+                                backgroundColor: '#009933',
                                 alignSelf: 'center',
                                 padding: 16,
                             }}
@@ -59,7 +60,7 @@ class ResultPage extends React.Component {
                                     }));
                             }}
                     >
-                        <Text syle={{color: 'white'}}>{Strings.t('play_again')}</Text>
+                        <Text style={{color: 'white', fontWeight: 'bold'}}>{Strings.t('play_again')}</Text>
                     </Button>
                 </View>
             </ScrollView>
