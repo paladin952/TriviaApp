@@ -16,7 +16,7 @@ class ResultPage extends React.Component {
         let answered = this.props.answered.map((t, i) => {
             return (
                 <View
-                    style={styles.answeres}
+                    style={styles.answers}
                     key={i}
                 >
                     <View>
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
         height: 0.66,
         marginTop: 8
     },
-    answeres: {
+    answers: {
         paddingLeft: 16,
         paddingRight: 16,
         paddingTop: 8,
