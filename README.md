@@ -1,7 +1,7 @@
 # TriviaApp
 A simple trivia app built with React Native + Redux
 
-#Run on device/simulator
+# Run on device/simulator
 `npm install`
 
 `react-native run-android`
