@@ -7,6 +7,7 @@ const colors = {
     green: '#009933',
     bg: '#333333',
     red: 'red',
+    header: '#606060'
 };
 
 export default colors;

@@ -20,7 +20,7 @@ const StackNav = StackNavigator({
         screen: QuestionPage,
         navigationOptions: {
             headerStyle: {
-                backgroundColor: '#606060'
+                backgroundColor: colors.header
             },
             headerTintColor: colors.white,
         }
