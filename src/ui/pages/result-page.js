@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {ScrollView, Text, View} from "react-native";
+import {ScrollView, Text, View, StyleSheet} from "react-native";
 import {Button} from "native-base";
 import {NavigationActions} from 'react-navigation'
 import Strings from "../../utils/strings";
@@ -15,25 +15,24 @@ class ResultPage extends React.Component {
         let answered = this.props.answered.map((t, i) => {
             return (
                 <View
-                    style={{paddingLeft: 16, paddingRight: 16, paddingTop: 8, paddingBottom: 8, minHeight: 100}}
+                    style={styles.answeres}
                     key={i}
                 >
                     <View>
-                        <Text style={{fontSize: 20, fontWeight: 'bold', color: 'white'}}>{t.item.category}</Text>
-                        <Text style={{marginLeft: 16, fontSize: 16, color: 'white', opacity: 0.8}}>{entities.decode(t.item.question)}</Text>
-
-                        <Text style={{color: t.isCorrect? '#009933' : 'red'}}>{t.isCorrect ? Strings.t('correct') : Strings.t('wrong')}</Text>
+                        <Text style={styles.category}>{t.item.category}</Text>
+                        <Text style={styles.question}>{entities.decode(t.item.question)}</Text>
+                        <Text style={{color: t.isCorrect ? colors.green : colors.red}}>{t.isCorrect ? Strings.t('correct') : Strings.t('wrong')}</Text>
                     </View>
 
-                    <View style={{alignSelf: 'stretch', backgroundColor: 'gray', height: 0.66, marginTop: 8}}/>
+                    <View style={styles.line}/>
                 </View>
             )
         });
 
         return (
-            <ScrollView style={{backgroundColor: '#333333'}}>
+            <ScrollView style={styles.bg}>
                 <View>
-                    <Text style={{color: 'white', fontWeight: 'bold', fontSize: 28, marginTop: 32, textAlign: 'center'}}>
+                    <Text style={styles.title}>
                         {Strings.t('you_scored', {score: this.props.correctCounter, numberOfQuestions: this.props.answered.length})}
                     </Text>
 
@@ -42,12 +41,7 @@ class ResultPage extends React.Component {
                     </View>
 
                     <Button rounded
-                            style={{
-                                marginBottom: 16,
-                                backgroundColor: '#009933',
-                                alignSelf: 'center',
-                                padding: 16,
-                            }}
+                            style={styles.playAgainButton}
                             onPress={() => {
                                 this.props.navigation.dispatch(NavigationActions.reset(
                                     {
@@ -58,14 +52,66 @@ class ResultPage extends React.Component {
                                     }));
                             }}
                     >
-                        <Text style={{color: 'white', fontWeight: 'bold'}}>{Strings.t('play_again')}</Text>
+                        <Text style={styles.playAgainText}>{Strings.t('play_again')}</Text>
                     </Button>
                 </View>
             </ScrollView>
         );
     }
-
 }
+
+export const colors = {
+    red: 'red',
+    bg: '#333333',
+    green: '#009933'
+};
+
+const styles = StyleSheet.create({
+    line: {
+        alignSelf: 'stretch',
+        backgroundColor: 'gray',
+        height: 0.66,
+        marginTop: 8
+    },
+    answeres: {
+        paddingLeft: 16,
+        paddingRight: 16,
+        paddingTop: 8,
+        paddingBottom: 8,
+        minHeight: 100
+    },
+    category: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: 'white'
+    },
+    question: {
+        marginLeft: 16,
+        fontSize: 16,
+        color: 'white',
+        opacity: 0.8
+    },
+    bg: {
+        backgroundColor: colors.bg
+    },
+    title: {
+        color: 'white',
+        fontWeight: 'bold',
+        fontSize: 28,
+        marginTop: 32,
+        textAlign: 'center'
+    },
+    playAgainText: {
+        color: 'white',
+        fontWeight: 'bold'
+    },
+    playAgainButton: {
+        marginBottom: 16,
+        backgroundColor: colors.green,
+        alignSelf: 'center',
+        padding: 16,
+    }
+});
 
 
 const mapStateToProps = state => {

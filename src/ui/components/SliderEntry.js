@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Image, TouchableOpacity, StyleSheet, Dimensions, Platform} from 'react-native';
+import {View, StyleSheet, Dimensions} from 'react-native';
 import PropTypes from 'prop-types';
 import {Button, Text} from "native-base";
 import Strings from '../../utils/strings'
@@ -46,7 +46,7 @@ export default class SliderEntry extends Component {
                     <View style={styles.buttonsContainer}>
                         <Button rounded
                                 danger
-                                style={styles.button}
+                                style={styles.buttonFalse}
                                 onPress={() => {
                                     this.props.onClickFalse(this.props.index, this.props.data);
                                 }}
@@ -55,7 +55,7 @@ export default class SliderEntry extends Component {
                         </Button>
 
                         <Button rounded
-                                style={styles.button}
+                                style={styles.buttonTrue}
                                 onPress={() => {
                                     this.props.onClickTrue(this.props.index, this.props.data);
                                 }}
@@ -74,7 +74,6 @@ export const colors = {
     gray: '#888888',
 };
 
-const IS_IOS = Platform.OS === 'ios';
 const {width: viewportWidth, height: viewportHeight} = Dimensions.get('window');
 
 function wp(percentage) {
@@ -92,7 +91,11 @@ export const itemWidth = slideWidth + itemHorizontalMargin;
 const entryBorderRadius = 8;
 
 const styles = StyleSheet.create({
-    button: {
+    buttonFalse: {
+        marginLeft: 16,
+        padding: 16
+    },
+    buttonTrue: {
         marginLeft: 16,
         backgroundColor: '#009933',
         padding: 16
