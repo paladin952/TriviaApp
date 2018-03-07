@@ -6,8 +6,8 @@ For performance disable dev mode on android: the carousel library has some perfo
 
 # Screenshots
 
-![alt text](http://public/a1.png)
-![alt text](http://public/a2.png)
-![alt text](http://public/a3.png)
-![alt text](http://public/a4.png)
-![alt text](http://public/a5.png)
+![alt text](public/a1.png)
+![alt text](public/a2.png)
+![alt text](public/a3.png)
+![alt text](public/a4.png)
+![alt text](public/a5.png)
