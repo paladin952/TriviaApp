@@ -18,13 +18,11 @@ class ResultPage extends React.Component {
                     style={{paddingLeft: 16, paddingRight: 16, paddingTop: 8, paddingBottom: 8, minHeight: 100}}
                     key={i}
                 >
-                    <View style={{flex: 1, flexDirection: 'row'}}>
-                        <Text style={{color: 'white'}}>{t.item.isCorrect ? "+" : "-"}</Text>
+                    <View>
+                        <Text style={{fontSize: 20, fontWeight: 'bold', color: 'white'}}>{t.item.category}</Text>
+                        <Text style={{marginLeft: 16, fontSize: 16, color: 'white', opacity: 0.8}}>{entities.decode(t.item.question)}</Text>
 
-                        <View>
-                            <Text style={{fontSize: 20, fontWeight: 'bold', color: 'white'}}>{t.item.category}</Text>
-                            <Text style={{marginLeft: 16, fontSize: 16, color: 'white', opacity: 0.8}}>{entities.decode(t.item.question)}</Text>
-                        </View>
+                        <Text style={{color: t.isCorrect? '#009933' : 'red'}}>{t.isCorrect ? Strings.t('correct') : Strings.t('wrong')}</Text>
                     </View>
 
                     <View style={{alignSelf: 'stretch', backgroundColor: 'gray', height: 0.66, marginTop: 8}}/>
