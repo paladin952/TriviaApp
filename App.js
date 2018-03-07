@@ -16,7 +16,7 @@ const StackNav = StackNavigator({
             header: null
         }
     },
-    Details: {
+    Questions: {
         screen: QuestionPage,
         navigationOptions: {
             headerStyle: {

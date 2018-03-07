@@ -31,7 +31,7 @@ class MenuPage extends React.Component {
                             style={styles.button}
                             onPress={() => {
                                 this.props.reset();
-                                this.props.navigation.navigate('Details')
+                                this.props.navigation.navigate('Questions')
                             }}
                     >
                         <Text style={{fontWeight: 'bold'}}>{Strings.t('menu_begin_button')}</Text>

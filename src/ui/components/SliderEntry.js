@@ -38,7 +38,6 @@ export default class SliderEntry extends Component {
                     <View style={{flex: 1}}>
                         <Text
                             style={styles.subtitle}
-                            numberOfLines={2}
                         >
                             {entities.decode(question)}
                         </Text>
