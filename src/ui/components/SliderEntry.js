@@ -76,7 +76,7 @@ function wp(percentage) {
     return Math.round(value);
 }
 
-const slideHeight = viewportHeight * 0.38;
+const slideHeight = viewportHeight * 0.45;
 const slideWidth = wp(94);
 const itemHorizontalMargin = wp(3);
 
@@ -146,6 +146,8 @@ const styles = StyleSheet.create({
     subtitle: {
         textAlign: 'center',
         marginTop: 16,
+        paddingLeft: 16,
+        paddingRight: 16,
         color: colors.gray,
         fontSize: 20,
         fontStyle: 'italic'
