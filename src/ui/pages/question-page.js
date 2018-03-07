@@ -27,7 +27,8 @@ class QuestionPage extends React.Component {
 
         if (index === this.props.questions.length - 1) {
             this.props.navigation.dispatch(NavigationActions.reset(
-                {index: 0,
+                {
+                    index: 0,
                     actions: [
                         NavigationActions.navigate({routeName: 'ResultPage'})
                     ]
@@ -53,82 +54,57 @@ class QuestionPage extends React.Component {
     render() {
         if (this.props.loading) {
             return (
-                <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: "#333333"}}>
                     <ActivityIndicator/>
                 </View>
             )
         }
 
         return (
-            <Container>
-                <Content>
-                    {/*<View>*/}
+            <View style={styles.exampleContainer}>
+                <Carousel
+                    ref={(ref) => {
+                        this.carousel = ref;
+                    }}
+                    data={this.props.questions}
+                    renderItem={this.renderItem}
+                    sliderWidth={sliderWidth}
+                    itemWidth={itemWidth}
+                    inactiveSlideScale={0.95}
+                    inactiveSlideOpacity={1}
+                    enableMomentum={false}
+                    activeSlideAlignment={'start'}
+                    containerCustomStyle={styles.slider}
+                    contentContainerCustomStyle={styles.sliderContentContainer}
+                    activeAnimationType={'spring'}
+                    layout={'tinder'}
+                    activeAnimationOptions={{
+                        friction: 4,
+                        tension: 40
+                    }}
+                    scrollEnabled={false}
+                    useScrollView={false}
+                    scrollToIndex={{animated: true, index: this.state.index}}
+                />
 
-                    {/*</View>*/}
-
-                    {/*<Card>*/}
-                    {/*<View style={{padding: 16, flex: 1}}>*/}
-                    {/*<Text>*/}
-                    {/*{JSON.stringify(this.props.questions)}*/}
-                    {/*</Text>*/}
-                    {/*</View>*/}
-                    {/*</Card>*/}
-
-                    {/*<View>*/}
-
-                    {/*</View>*/}
-
-                    <View style={styles.exampleContainer}>
-                        <Text style={styles.title}>{`Example title`}</Text>
-                        <Text style={styles.subtitle}>Subtitle</Text>
-                        <Carousel
-                            ref={(ref) => {
-                                this.carousel = ref;
-                            }}
-                            data={this.props.questions}
-                            renderItem={this.renderItem}
-                            sliderWidth={sliderWidth}
-                            itemWidth={itemWidth}
-                            inactiveSlideScale={0.95}
-                            inactiveSlideOpacity={1}
-                            enableMomentum={false}
-                            activeSlideAlignment={'start'}
-                            containerCustomStyle={styles.slider}
-                            contentContainerCustomStyle={styles.sliderContentContainer}
-                            activeAnimationType={'spring'}
-                            layout={'tinder'}
-                            activeAnimationOptions={{
-                                friction: 4,
-                                tension: 40
-                            }}
-                            scrollEnabled={false}
-                            useScrollView={false}
-                            scrollToIndex={{animated: true, index: this.state.index}}
-                        />
-
-                        <Pagination
-                            dotsLength={this.props.questions.length}
-                            activeDotIndex={this.props.currentIndex}
-                            containerStyle={{
-                                paddingVertical: 8
-                            }}
-                            dotColor={'rgba(255, 255, 255, 0.92)'}
-                            dotStyle={{
-                                width: 8,
-                                height: 8,
-                                borderRadius: 4,
-                                marginHorizontal: 2
-                            }}
-                            inactiveDotColor={colors.black}
-                            inactiveDotOpacity={0.4}
-                            inactiveDotScale={0.6}
-                            carouselRef={this._slider1Ref}
-                            tappableDots={!!this._slider1Ref}
-                        />
-                    </View>
-
-                </Content>
-            </Container>
+                <Pagination
+                    dotsLength={this.props.questions.length}
+                    activeDotIndex={this.props.currentIndex}
+                    containerStyle={{
+                        paddingVertical: 1
+                    }}
+                    dotColor={'rgba(255, 255, 255, 0.92)'}
+                    dotStyle={{
+                        width: 10,
+                        height: 10,
+                        borderRadius: 4,
+                        marginHorizontal: 1
+                    }}
+                    inactiveDotColor={colors.black}
+                    inactiveDotOpacity={0.4}
+                    inactiveDotScale={0.6}
+                />
+            </View>
         )
     }
 }
@@ -156,6 +132,8 @@ const styles = StyleSheet.create({
         flex: 1
     },
     exampleContainer: {
+        flex: 1,
+        backgroundColor: '#333333',
         paddingVertical: 30
     },
     exampleContainerDark: {

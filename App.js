@@ -16,6 +16,10 @@ const StackNav = StackNavigator({
     },
     Details: {
         screen: QuestionPage,
+        navigationOptions: {
+            headerStyle: {backgroundColor: '#606060'},
+            headerTintColor: 'white',
+        }
     },
     ResultPage: {
         screen: ResultPage,
