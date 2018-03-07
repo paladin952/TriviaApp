@@ -3,6 +3,7 @@ import {View, StyleSheet, Dimensions} from 'react-native';
 import PropTypes from 'prop-types';
 import {Button, Text} from "native-base";
 import Strings from '../../utils/strings'
+import colors from "../../utils/colors";
 
 const Entities = require('html-entities').XmlEntities;
 const entities = new Entities();
@@ -69,11 +70,6 @@ export default class SliderEntry extends Component {
     }
 }
 
-export const colors = {
-    black: '#1a1917',
-    gray: '#888888',
-};
-
 const {width: viewportWidth, height: viewportHeight} = Dimensions.get('window');
 
 function wp(percentage) {
@@ -97,7 +93,7 @@ const styles = StyleSheet.create({
     },
     buttonTrue: {
         marginLeft: 16,
-        backgroundColor: '#009933',
+        backgroundColor: colors.green,
         padding: 16
     },
     buttonText: {
@@ -133,7 +129,7 @@ const styles = StyleSheet.create({
         paddingTop: 20 - entryBorderRadius,
         paddingBottom: 20,
         paddingHorizontal: 16,
-        backgroundColor: 'white',
+        backgroundColor: colors.white,
         borderTopRightRadius: entryBorderRadius,
         borderTopLeftRadius: entryBorderRadius,
         borderBottomLeftRadius: entryBorderRadius,
@@ -147,7 +143,7 @@ const styles = StyleSheet.create({
         letterSpacing: 0.5
     },
     titleEven: {
-        color: 'white'
+        color: colors.white
     },
     subtitle: {
         textAlign: 'center',

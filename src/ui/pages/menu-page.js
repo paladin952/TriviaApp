@@ -7,6 +7,7 @@ import * as Actions from "../../redux/actions/ui";
 import {bindActionCreators} from 'redux';
 import {NavigationActions} from 'react-navigation'
 import * as questionActions from "../../redux/actions/questions";
+import colors from "../../utils/colors";
 
 class MenuPage extends React.Component {
 
@@ -48,20 +49,20 @@ const styles = StyleSheet.create({
         padding: 16,
         alignItems: 'center',
         justifyContent: 'space-around',
-        backgroundColor: '#333333'
+        backgroundColor: colors.bg
     },
     title: {
-        color: 'white',
+        color: colors.white,
         fontSize: 32,
         textAlign: 'center',
     },
     message: {
-        color: 'white',
+        color: colors.white,
         fontSize: 24,
         textAlign: 'center',
     },
     button: {
-        backgroundColor: '#009933',
+        backgroundColor: colors.green,
         alignSelf: 'center',
         padding: 16
     }

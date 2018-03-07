@@ -6,6 +6,7 @@ import QuestionPage from "./src/ui/pages/question-page";
 import ResultPage from "./src/ui/pages/result-page";
 import {Provider} from "react-redux";
 import store from "./src/redux/store";
+import colors from "./src/utils/colors";
 
 console.disableYellowBox = true;
 
@@ -18,8 +19,10 @@ const StackNav = StackNavigator({
     Details: {
         screen: QuestionPage,
         navigationOptions: {
-            headerStyle: {backgroundColor: '#606060'},
-            headerTintColor: 'white',
+            headerStyle: {
+                backgroundColor: '#606060'
+            },
+            headerTintColor: colors.white,
         }
     },
     ResultPage: {
@@ -33,7 +36,7 @@ const StackNav = StackNavigator({
 
 const App = () => (
     <Provider store={store}>
-      <StackNav/>
+        <StackNav/>
     </Provider>
 );
 

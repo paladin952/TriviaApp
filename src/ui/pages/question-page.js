@@ -7,6 +7,7 @@ import Carousel, {Pagination} from 'react-native-snap-carousel';
 import SliderEntry, {itemWidth, sliderWidth} from "../components/SliderEntry";
 import {NavigationActions} from 'react-navigation'
 import Strings from '../../utils/strings'
+import colors from "../../utils/colors";
 
 class QuestionPage extends React.Component {
 
@@ -111,11 +112,6 @@ class QuestionPage extends React.Component {
     }
 }
 
-export const colors = {
-    black: '#1a1917',
-    bg: '#333333'
-};
-
 const styles = StyleSheet.create({
     loadingIndicatorContainer: {
         flex: 1,
@@ -136,7 +132,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         textAlign: 'center',
         padding: 16,
-        color: 'white',
+        color: colors.white,
         fontSize: 26
     },
     container: {

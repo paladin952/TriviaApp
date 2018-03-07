@@ -4,6 +4,7 @@ import {ScrollView, Text, View, StyleSheet} from "react-native";
 import {Button} from "native-base";
 import {NavigationActions} from 'react-navigation'
 import Strings from "../../utils/strings";
+import colors from "../../utils/colors";
 
 
 const Entities = require('html-entities').XmlEntities;
@@ -60,12 +61,6 @@ class ResultPage extends React.Component {
     }
 }
 
-export const colors = {
-    red: 'red',
-    bg: '#333333',
-    green: '#009933'
-};
-
 const styles = StyleSheet.create({
     line: {
         alignSelf: 'stretch',
@@ -83,26 +78,26 @@ const styles = StyleSheet.create({
     category: {
         fontSize: 20,
         fontWeight: 'bold',
-        color: 'white'
+        color: colors.white
     },
     question: {
         marginLeft: 16,
         fontSize: 16,
-        color: 'white',
+        color: colors.white,
         opacity: 0.8
     },
     bg: {
         backgroundColor: colors.bg
     },
     title: {
-        color: 'white',
+        color: colors.white,
         fontWeight: 'bold',
         fontSize: 28,
         marginTop: 32,
         textAlign: 'center'
     },
     playAgainText: {
-        color: 'white',
+        color: colors.white,
         fontWeight: 'bold'
     },
     playAgainButton: {
