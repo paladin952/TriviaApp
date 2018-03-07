@@ -6,16 +6,9 @@ import * as questionActions from "../../redux/actions/questions";
 import Carousel, {Pagination} from 'react-native-snap-carousel';
 import SliderEntry, {itemWidth, sliderWidth} from "../components/SliderEntry";
 import {NavigationActions} from 'react-navigation'
+import Strings from '../../utils/strings'
 
 class QuestionPage extends React.Component {
-
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            index: 0
-        };
-    }
 
     componentDidMount() {
         this.props.fetchQuestions();
@@ -52,6 +45,25 @@ class QuestionPage extends React.Component {
     };
 
     render() {
+
+        if (this.props.networkError) {
+            return (
+                <View style={styles.bgContainer}>
+                    <Text style={styles.errorText}>
+                        {Strings.t('network_problem')}
+                    </Text>
+                </View>
+            )
+        } else if (this.props.genericError) {
+            return (
+                <View style={styles.bgContainer}>
+                    <Text style={styles.errorText}>
+                        {Strings.t('something_went_wrong')}
+                    </Text>
+                </View>
+            )
+        }
+
         if (this.props.loading) {
             return (
                 <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: "#333333"}}>
@@ -61,7 +73,7 @@ class QuestionPage extends React.Component {
         }
 
         return (
-            <View style={styles.exampleContainer}>
+            <View style={styles.bgContainer}>
                 <Carousel
                     ref={(ref) => {
                         this.carousel = ref;
@@ -84,7 +96,6 @@ class QuestionPage extends React.Component {
                     }}
                     scrollEnabled={false}
                     useScrollView={false}
-                    scrollToIndex={{animated: true, index: this.state.index}}
                 />
 
                 <Pagination
@@ -118,6 +129,13 @@ export const colors = {
 };
 
 const styles = StyleSheet.create({
+    errorText: {
+        alignSelf: 'center',
+        textAlign: 'center',
+        padding: 16,
+        color: 'white',
+        fontSize: 26
+    },
     safeArea: {
         flex: 1,
         backgroundColor: colors.black
@@ -132,7 +150,7 @@ const styles = StyleSheet.create({
     scrollview: {
         flex: 1
     },
-    exampleContainer: {
+    bgContainer: {
         flex: 1,
         backgroundColor: '#333333',
         paddingVertical: 30
@@ -186,7 +204,9 @@ const mapStateToProps = state => {
         loading: state.ui.loading,
         genericError: state.ui.genericError,
         questions: state.questions.questions,
-        currentIndex: state.questions.currentQuestionIndex
+        currentIndex: state.questions.currentQuestionIndex,
+        networkError: state.ui.networkError,
+        genericError: state.ui.genericError
     }
 };
 const mapDispatchToProps = dispatch => {

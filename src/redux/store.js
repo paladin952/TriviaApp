@@ -3,7 +3,6 @@ import api from "./middleswares/api";
 import ui from "./reducers/ui";
 import questions from "./reducers/questions";
 import multi from "./middleswares/multi";
-import error from "./middleswares/error";
 import questionsMiddleware from "./middleswares/questions";
 
 
@@ -15,7 +14,6 @@ const store = createStore(
         applyMiddleware(
             api,
             multi,
-            error,
             questionsMiddleware
         )
     )

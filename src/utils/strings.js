@@ -14,7 +14,9 @@ I18n.translations = {
         button_true: 'True',
         button_false: 'False',
         correct: 'Correct',
-        wrong: 'Wrong'
+        wrong: 'Wrong',
+        network_problem: 'Connectivity problem. Check your internet connection and try again!',
+        something_went_wrong: 'Something went wrong. Please try again!'
     }
 };
 

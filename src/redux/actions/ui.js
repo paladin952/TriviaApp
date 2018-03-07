@@ -12,13 +12,17 @@ export const endNetwork = () => ({
 });
 
 export const showGenericError = () => ({
-   type: actions.GENERIC_ERROR,
-    payload: {
-       title: Strings.t('generic_error'),
-        actionButton: {
-           title: Strings.t('retry'),
-            onPress: () => {
-            },
-        }
-    }
+   type: actions.SHOW_GENERIC_ERROR,
+});
+
+export const hideGenericError = () => ({
+    type: actions.HIDE_GENERIC_ERROR,
+});
+
+export const showNetworkError = () => ({
+    type: actions.SHOW_NETWORK_ERROR,
+});
+
+export const hideNetworkError = () => ({
+    type: actions.HIDE_NETWORK_ERROR,
 });

@@ -1,6 +1,6 @@
 import * as actions from "../consts/action-types";
 import * as Constants from "../../utils/constants";
-import {showGenericError} from "./ui";
+import {showGenericError, showNetworkError} from "./ui";
 
 export const fetchQuestions = () => ({
     type: actions.API,
@@ -11,7 +11,11 @@ export const fetchQuestions = () => ({
             return setQuestions(questions)
         },
         failure: (err) => {
-            return showGenericError()
+            if(!err.status) {
+                return showNetworkError();
+            } else {
+                return showGenericError()
+            }
         }
 
     }

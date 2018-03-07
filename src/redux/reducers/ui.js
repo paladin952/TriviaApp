@@ -1,7 +1,9 @@
 import * as actions from "../consts/action-types";
 
 let initialState = {
-    loading: true
+    loading: true,
+    genericError: false,
+    networkError: false
 };
 
 const uiReducer = (state = initialState, action) => {
@@ -12,8 +14,18 @@ const uiReducer = (state = initialState, action) => {
         case actions.END_NETWORK:
             return {...state, loading: false};
 
-        case actions.GENERIC_ERROR:
+        case actions.SHOW_GENERIC_ERROR:
             return {...state, genericError: true};
+
+        case actions.HIDE_GENERIC_ERROR:
+            return {...state, genericError: false};
+
+        case actions.SHOW_NETWORK_ERROR:
+            return {...state, networkError: true};
+
+        case actions.HIDE_NETWORK_ERROR:
+            return {...state, networkError: false};
+
 
         default:
             return state;
