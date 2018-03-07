@@ -34,11 +34,9 @@ class QuestionPage extends React.Component {
             data={item}
             index={index}
             onClickTrue={(index, item) => {
-                console.warn("clicked");
                 this.onAnswerClicked(true, item, index);
             }}
             onClickFalse={(index, item) => {
-                console.warn("clicked");
                 this.onAnswerClicked(false, item, index);
             }}
         />);
@@ -66,7 +64,7 @@ class QuestionPage extends React.Component {
 
         if (this.props.loading) {
             return (
-                <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: "#333333"}}>
+                <View style={styles.loadingIndicatorContainer}>
                     <ActivityIndicator/>
                 </View>
             )
@@ -101,16 +99,9 @@ class QuestionPage extends React.Component {
                 <Pagination
                     dotsLength={this.props.questions.length}
                     activeDotIndex={this.props.currentIndex}
-                    containerStyle={{
-                        paddingVertical: 1
-                    }}
+                    containerStyle={styles.dotsContainer}
                     dotColor={'rgba(255, 255, 255, 0.92)'}
-                    dotStyle={{
-                        width: 10,
-                        height: 10,
-                        borderRadius: 4,
-                        marginHorizontal: 1
-                    }}
+                    dotStyle={styles.dot}
                     inactiveDotColor={colors.black}
                     inactiveDotOpacity={0.4}
                     inactiveDotScale={0.6}
@@ -122,13 +113,25 @@ class QuestionPage extends React.Component {
 
 export const colors = {
     black: '#1a1917',
-    gray: '#888888',
-    background1: '#B721FF',
-    background2: '#21D4FD',
-
+    bg: '#333333'
 };
 
 const styles = StyleSheet.create({
+    loadingIndicatorContainer: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: colors.bg
+    },
+    dot: {
+        width: 10,
+        height: 10,
+        borderRadius: 4,
+        marginHorizontal: 1
+    },
+    dotsContainer: {
+        paddingVertical: 1
+    },
     errorText: {
         alignSelf: 'center',
         textAlign: 'center',
@@ -136,30 +139,14 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 26
     },
-    safeArea: {
-        flex: 1,
-        backgroundColor: colors.black
-    },
     container: {
         flex: 1,
         backgroundColor: colors.background1
     },
-    gradient: {
-        ...StyleSheet.absoluteFillObject
-    },
-    scrollview: {
-        flex: 1
-    },
     bgContainer: {
         flex: 1,
-        backgroundColor: '#333333',
+        backgroundColor: colors.bg,
         paddingVertical: 30
-    },
-    exampleContainerDark: {
-        backgroundColor: colors.black
-    },
-    exampleContainerLight: {
-        backgroundColor: 'white'
     },
     title: {
         paddingHorizontal: 30,
@@ -168,9 +155,6 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         textAlign: 'center'
-    },
-    titleDark: {
-        color: colors.black
     },
     subtitle: {
         marginTop: 5,
@@ -188,15 +172,6 @@ const styles = StyleSheet.create({
     sliderContentContainer: {
         paddingVertical: 10 // for custom animation
     },
-    paginationContainer: {
-        paddingVertical: 8
-    },
-    paginationDot: {
-        width: 8,
-        height: 8,
-        borderRadius: 4,
-        marginHorizontal: 8
-    }
 });
 
 const mapStateToProps = state => {
@@ -206,7 +181,6 @@ const mapStateToProps = state => {
         questions: state.questions.questions,
         currentIndex: state.questions.currentQuestionIndex,
         networkError: state.ui.networkError,
-        genericError: state.ui.genericError
     }
 };
 const mapDispatchToProps = dispatch => {

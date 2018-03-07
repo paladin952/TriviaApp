@@ -31,10 +31,6 @@ export default class SliderEntry extends Component {
                 style={styles.slideInnerContainer}
             >
                 <View style={styles.shadow}/>
-                {/*<View style={styles.imageContainer}>*/}
-                {/*<View style={[styles.radiusMask, even ? styles.radiusMaskEven : {}]}/>*/}
-                {/*</View>*/}
-
                 <View style={styles.textContainer}>
                     {uppercaseTitle}
 
@@ -47,32 +43,27 @@ export default class SliderEntry extends Component {
                         </Text>
                     </View>
 
-                    <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+                    <View style={styles.buttonsContainer}>
                         <Button rounded
                                 danger
-                                style={{
-                                    padding: 16
-                                }}
+                                style={styles.button}
                                 onPress={() => {
                                     this.props.onClickFalse(this.props.index, this.props.data);
                                 }}
                         >
-                            <Text style={{fontWeight: 'bold'}}>{Strings.t('button_false')}</Text>
+                            <Text style={styles.buttonText}>{Strings.t('button_false')}</Text>
                         </Button>
 
                         <Button rounded
-                                style={{marginLeft: 16, backgroundColor: '#009933', padding: 16}}
+                                style={styles.button}
                                 onPress={() => {
                                     this.props.onClickTrue(this.props.index, this.props.data);
                                 }}
                         >
-                            <Text style={{fontWeight: 'bold'}}>{Strings.t('button_true')}</Text>
+                            <Text style={styles.buttonText}>{Strings.t('button_true')}</Text>
                         </Button>
                     </View>
-
                 </View>
-
-
             </View>
         );
     }
@@ -81,9 +72,6 @@ export default class SliderEntry extends Component {
 export const colors = {
     black: '#1a1917',
     gray: '#888888',
-    background1: '#B721FF',
-    background2: '#21D4FD',
-    green: '#009933'
 };
 
 const IS_IOS = Platform.OS === 'ios';
@@ -104,6 +92,19 @@ export const itemWidth = slideWidth + itemHorizontalMargin;
 const entryBorderRadius = 8;
 
 const styles = StyleSheet.create({
+    button: {
+        marginLeft: 16,
+        backgroundColor: '#009933',
+        padding: 16
+    },
+    buttonText: {
+        fontWeight: 'bold'
+    },
+    buttonsContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
     slideInnerContainer: {
         alignSelf: 'center',
         width: itemWidth,
@@ -123,35 +124,6 @@ const styles = StyleSheet.create({
         shadowRadius: 10,
         borderRadius: entryBorderRadius
     },
-    imageContainer: {
-        flex: 1,
-        marginBottom: IS_IOS ? 0 : -1, // Prevent a random Android rendering issue
-        backgroundColor: 'white',
-        borderTopLeftRadius: entryBorderRadius,
-        borderTopRightRadius: entryBorderRadius
-    },
-    imageContainerEven: {
-        backgroundColor: colors.black
-    },
-    image: {
-        ...StyleSheet.absoluteFillObject,
-        resizeMode: 'cover',
-        borderRadius: IS_IOS ? entryBorderRadius : 0,
-        borderTopLeftRadius: entryBorderRadius,
-        borderTopRightRadius: entryBorderRadius
-    },
-    // image's border radius is buggy on iOS; let's hack it!
-    radiusMask: {
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
-        right: 0,
-        height: entryBorderRadius,
-        backgroundColor: 'white'
-    },
-    radiusMaskEven: {
-        backgroundColor: colors.black
-    },
     textContainer: {
         flex: 4,
         justifyContent: 'center',
@@ -163,9 +135,6 @@ const styles = StyleSheet.create({
         borderTopLeftRadius: entryBorderRadius,
         borderBottomLeftRadius: entryBorderRadius,
         borderBottomRightRadius: entryBorderRadius
-    },
-    textContainerEven: {
-        backgroundColor: colors.black
     },
     title: {
         textAlign: 'center',
@@ -183,8 +152,5 @@ const styles = StyleSheet.create({
         color: colors.gray,
         fontSize: 20,
         fontStyle: 'italic'
-    },
-    subtitleEven: {
-        color: 'rgba(255, 255, 255, 0.7)'
     }
 });

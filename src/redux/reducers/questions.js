@@ -14,7 +14,6 @@ const questionsReducer = (state = initialData, action) => {
             return {...state, currentQuestionIndex: action.payload};
 
         case actions.INCREMENT_CORRECT_COUNTER:
-            console.warn('INCREMENT_CORRECT_COUNTER', state.answered);
             return {...state, correctCounter: state.correctCounter + 1};
 
         case actions.RESET:
