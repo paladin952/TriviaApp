@@ -77,7 +77,7 @@ class QuestionPage extends React.Component {
                     containerCustomStyle={styles.slider}
                     contentContainerCustomStyle={styles.sliderContentContainer}
                     activeAnimationType={'spring'}
-                    layout={'tinder'}
+                    layout={'stack'}
                     activeAnimationOptions={{
                         friction: 4,
                         tension: 40

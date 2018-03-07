@@ -7,6 +7,7 @@ import ResultPage from "./src/ui/pages/result-page";
 import {Provider} from "react-redux";
 import store from "./src/redux/store";
 
+console.disableYellowBox = true;
 
 const StackNav = StackNavigator({
     Menu: {
