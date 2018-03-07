@@ -82,7 +82,6 @@ const itemHorizontalMargin = wp(3);
 
 export const sliderWidth = viewportWidth;
 export const itemWidth = slideWidth + itemHorizontalMargin;
-
 const entryBorderRadius = 8;
 
 const styles = StyleSheet.create({
